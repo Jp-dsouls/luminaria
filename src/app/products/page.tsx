@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useMemo } from "react"
+import { useState, useMemo, Suspense } from "react"
 import { MessageCircle, Heart, ChevronDown, Grid, List } from "lucide-react"
 import Link from "next/link"
 import { useSearchParams } from "next/navigation"
@@ -8,7 +8,7 @@ import Header from "@/components/layout/header"
 import Footer from "@/components/layout/footer"
 import { products } from "@/lib/products"
 
-export default function ProductsPage() {
+function ProductsContent() {
   const searchParams = useSearchParams()
   const initialType = searchParams.get("type")
 
@@ -282,5 +282,24 @@ export default function ProductsPage() {
       </div>
       <Footer />
     </div>
+  )
+}
+
+export default function ProductsPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-background">
+        <Header />
+        <div className="max-w-7xl mx-auto px-4 py-8">
+          <div className="mb-8">
+            <h1 className="text-4xl font-bold text-foreground mb-2">Catálogo de Luminarias</h1>
+            <p className="text-muted-foreground">Cargando...</p>
+          </div>
+        </div>
+        <Footer />
+      </div>
+    }>
+      <ProductsContent />
+    </Suspense>
   )
 }

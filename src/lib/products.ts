@@ -1,5 +1,23 @@
 // Datos de productos para el catálogo
-export const products = [
+export type Product = {
+  id: number;
+  name: string;
+  price: number;
+  originalPrice?: number;
+  image: string;
+  category: string;
+  lightColor: string;
+  type: string;
+  rating: number;
+  discount?: number;
+  badge?: string;
+  gallery?: string[];
+  description?: string;
+  features?: string[];
+  reviews?: number;
+};
+
+export const products: Product[] = [
   {
     id: 1,
     name: "Spot LED Empotrable Redondo",
@@ -86,22 +104,4 @@ export const products = [
     type: "lámpara-piso" as const,
     rating: 4.4,
   },
-]
-
-export type Product = {
-  id: number;
-  name: string;
-  price: number;
-  originalPrice?: number;
-  image: string;
-  category: string;
-  lightColor: string;
-  type: string;
-  rating: number;
-  discount?: number;
-  badge?: string;
-  gallery?: string[];
-  description?: string;
-  features?: string[];
-  reviews?: number;
-};
+];
